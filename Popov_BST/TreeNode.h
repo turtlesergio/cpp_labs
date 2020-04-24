@@ -3,21 +3,20 @@
 
 class TreeNode {
 public:
-	TreeNode();
-	TreeNode(int iValue);
-	~TreeNode();
+    TreeNode() : value(0) {};
+    explicit TreeNode(int iValue) : value(iValue) {}
+    ~TreeNode();
 
-	int GetValue();
-	TreeNode* GetLeftChild();
-	TreeNode* GetRightChild();
+    int GetValue();
+    TreeNode* GetLeftChild() const;
+    TreeNode* GetRightChild() const;
 
-	void SetValue(int iValue);
-	void SetLeftChild(TreeNode* node);
-	void SetRightChild(TreeNode* node);
+    void SetLeftChild(TreeNode* node);
+    void SetRightChild(TreeNode* node);
 private:
-	int value;
-	TreeNode* left;
-	TreeNode* right;
+    const int value = 0;
+    TreeNode* left = nullptr;
+    TreeNode* right = nullptr;
 };
 
-#endif // NODE_H
+#endif // NOD{}E_H
