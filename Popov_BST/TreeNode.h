@@ -3,8 +3,8 @@
 
 class TreeNode {
 public:
-    TreeNode() : value(0) {};
-    explicit TreeNode(int iValue) : value(iValue) {}
+    TreeNode() = default;
+    explicit TreeNode(const int iValue) : value(iValue) {}
     ~TreeNode();
 
     int GetValue();
@@ -19,4 +19,4 @@ private:
     TreeNode* right = nullptr;
 };
 
-#endif // NOD{}E_H
+#endif // NODE_H

@@ -1,12 +1,11 @@
 #include "BinaryTree.h"
-#include "TreeNode.h"
 
 BinaryTree::~BinaryTree() {
-    delete root;
+    delete m_root;
 }
 
 TreeNode* BinaryTree::Search(int value) const {
-    return Search(root, value);
+    return Search(m_root, value);
 }
 
 TreeNode* BinaryTree::Search(TreeNode* root, int iValue) {
@@ -18,15 +17,13 @@ TreeNode* BinaryTree::Search(TreeNode* root, int iValue) {
 }
 
 void BinaryTree::Insert(int iValue) {
-    if (root != nullptr)
-        BinaryTree::Insert(root, iValue);
+    if (m_root != nullptr)
+        BinaryTree::Insert(m_root, iValue);
     else
-        root = new TreeNode(iValue);
+        m_root = new TreeNode(iValue);
 }
 
 void BinaryTree::Insert(TreeNode* root, int iValue) {
-    if (root->GetValue() == 0)
-        root = new TreeNode(iValue);
     if (root->GetValue() > iValue) {
         if (root->GetLeftChild() == nullptr)
             root->SetLeftChild(new TreeNode(iValue));
