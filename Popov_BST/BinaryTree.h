@@ -17,7 +17,7 @@ public:
 private:
     TreeNode* m_root = nullptr;
     static TreeNode* Search(TreeNode* root, int value);
-    static void Insert(TreeNode* root, int iValue);
+
 };
 
 #endif // BST_H

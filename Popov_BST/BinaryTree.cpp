@@ -17,23 +17,7 @@ TreeNode* BinaryTree::Search(TreeNode* root, int iValue) {
 }
 
 void BinaryTree::Insert(int iValue) {
-    if (m_root != nullptr)
-        BinaryTree::Insert(m_root, iValue);
-    else
-        m_root = new TreeNode(iValue);
+        TreeNode::Insert(m_root, iValue);
 }
 
-void BinaryTree::Insert(TreeNode* root, int iValue) {
-    if (root->GetValue() > iValue) {
-        if (root->GetLeftChild() == nullptr)
-            root->SetLeftChild(new TreeNode(iValue));
-        else
-            Insert(root->GetLeftChild(), iValue);
-    }
-    else {
-        if (root->GetRightChild() == nullptr)
-            root->SetRightChild(new TreeNode(iValue));
-        else
-            Insert(root->GetRightChild(), iValue);
-    }
-}
+
