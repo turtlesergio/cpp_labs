@@ -5,7 +5,7 @@ TreeNode::~TreeNode() {
     delete right;
 }
 
-int TreeNode::GetValue() {
+int TreeNode::GetValue() const {
     return value;
 }
 
@@ -30,16 +30,6 @@ void TreeNode::Insert(TreeNode* &root, int iValue) {
         root = new TreeNode(iValue);
         return;
     }
-    if (root->GetValue() > iValue) {
-        if (root->GetLeftChild() == nullptr)
-            root->SetLeftChild(new TreeNode(iValue));
-        else
-            Insert(root->left, iValue);
-    }
-    else {
-        if (root->GetRightChild() == nullptr)
-            root->SetRightChild(new TreeNode(iValue));
-        else
-            Insert(root->right, iValue);
-    }
+    ( root->GetValue() > iValue ) ? Insert(root->left, iValue) :
+                                    Insert(root->right, iValue);
 }

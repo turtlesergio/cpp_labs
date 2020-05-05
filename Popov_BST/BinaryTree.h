@@ -1,10 +1,6 @@
 #ifndef BST_H
-#define BST_H
 
 #include "TreeNode.h"
-#include "algorithm"
-
-using namespace std;
 
 class BinaryTree {
 public:
