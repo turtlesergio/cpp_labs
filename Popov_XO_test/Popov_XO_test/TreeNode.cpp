@@ -1,17 +1,17 @@
 #include "TreeNode.h"
 #include "cassert"
 
-TreeNode::TreeNode(PlayField newBoard, TreeNode* parent) : playboard(newBoard), parent(parent)
-{
-}
-
 TreeNode::~TreeNode() {
-    children.clear();
+    for (auto child : children)
+        delete child;
 }
 
 bool TreeNode::isTerminal() const {
-    assert(playboard.checkFieldStatus() != PlayField::fsInvalid);
-    return playboard.checkFieldStatus() != PlayField::fsNormal;
+    auto fieldStatus = playboard.checkFieldStatus();
+    assert(fieldStatus != PlayField::fsInvalid);
+    return fieldStatus == PlayField::fsNoughtsWin ||
+    fieldStatus == PlayField::fsCrossesWin ||
+    fieldStatus == PlayField::fsDraw;
 }
 
 void TreeNode::addChild(TreeNode* child) {

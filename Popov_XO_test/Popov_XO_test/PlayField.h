@@ -6,7 +6,8 @@
 class PlayField {
 public:
     enum CellStatus { csEmpty, csCross, csNought };
-    enum FieldStatus { fsInvalid, fsNormal, fsCrossesWin, fsNoughtsWin, fsDraw };
+    enum FieldStatus { fsInvalid, fsNormal,
+            fsCrossesWin, fsNoughtsWin, fsDraw };
 
     class CellPos {
     public:
@@ -21,8 +22,8 @@ public:
             _x = *cell.begin();
             _y = *(cell.begin() + 1);
         }
-        const int getX() { return _x; }
-        const int getY() { return _y; }
+        int getX() { return _x; }
+        int getY() { return _y; }
     private:
         int _x, _y;
     };
@@ -30,12 +31,12 @@ public:
     PlayField makeMove(CellPos cell) const;
     std::vector<CellPos> getEmptyCells() const;
     FieldStatus checkFieldStatus() const;
-
-    //FieldStatus checkFieldStatusOLD() const;
-
     CellStatus operator[](CellPos cell) const;
+    static constexpr int m_size = 3;
 private:
-    CellStatus playboard[3][3] = { csEmpty, csEmpty, csEmpty, csEmpty, csEmpty, csEmpty, csEmpty, csEmpty, csEmpty, };
+    CellStatus playboard[m_size][m_size] =
+            { csEmpty, csEmpty, csEmpty, csEmpty,
+              csEmpty, csEmpty, csEmpty, csEmpty, csEmpty, };
     PlayField operator+(CellPos cell) const;
     CellStatus nextMove() const;
 };

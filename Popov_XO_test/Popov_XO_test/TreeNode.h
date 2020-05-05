@@ -3,7 +3,8 @@
 
 class TreeNode {
 public:
-    TreeNode(PlayField newBoard, TreeNode* parent = nullptr);
+    TreeNode(PlayField newBoard, TreeNode* parent)
+    : playboard(newBoard), parent(parent) {};
     ~TreeNode();
     bool isTerminal() const;
     void addChild(TreeNode* child);

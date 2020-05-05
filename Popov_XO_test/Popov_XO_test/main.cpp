@@ -1,14 +1,13 @@
 #include "vector"
 #include "TreeNode.h"
-#include "PlayField.h"
 #include "string"
 #include "iostream"
 
 using namespace std;
 
 void PrintField(PlayField field) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
+    for (int i = 0; i < PlayField::m_size; i++) {
+        for (int j = 0; j < PlayField::m_size; j++) {
             string output = "| ";
             if (field[PlayField::CellPos({ i, j })] == PlayField::csCross)
                 output = "|X";
@@ -31,7 +30,7 @@ void BuildSubTree(TreeNode& node) {
     }
 }
 
-void CountResults(TreeNode& node, int(&results)[3]) {
+void CountResults(TreeNode& node, int(&results)[PlayField::m_size]) {
     if (node.isTerminal()) {
         switch (node.value().checkFieldStatus()) {
             case PlayField::fsCrossesWin:
@@ -53,9 +52,9 @@ void CountResults(TreeNode& node, int(&results)[3]) {
 }
 
 void WalkTree(TreeNode& node, PlayField playfield) {
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 3 * PlayField::m_size; i++) {
         PrintField(node[i].value());
-        int results[3] = { 0, 0, 0 };
+        int results[PlayField::m_size] = { 0, 0, 0 };
         CountResults(node[i], results);
         cout << "Xs: " << results[0] << "\tOs: " <<
              results[1] << "\tDraws: " << results[2] << "\n";
@@ -64,9 +63,8 @@ void WalkTree(TreeNode& node, PlayField playfield) {
 
 int main() {
     PlayField playfield;
-    TreeNode node(playfield);
+    TreeNode node(playfield, nullptr);
     BuildSubTree(node);
     WalkTree(node, playfield);
-    system("pause");
     return 0;
 }
