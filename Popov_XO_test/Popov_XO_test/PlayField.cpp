@@ -1,4 +1,4 @@
-#include "cassert"
+#include <cassert>
 #include "PlayField.h"
 
 using namespace std;
@@ -18,6 +18,7 @@ PlayField::CellStatus PlayField::nextMove() const {
                 Os++;
         }
     }
+    assert(Xs - Os <= 1);
     return Xs > Os ? csNought : csCross;
 }
 
@@ -26,7 +27,7 @@ vector<PlayField::CellPos> PlayField::getEmptyCells() const {
     for (int i = 0; i < m_size; i++)
         for (int j = 0; j < m_size; j++)
             if (playboard[i][j] == csEmpty)
-                emptyCells.push_back(PlayField::CellPos({ i, j }));
+                emptyCells.push_back({ i, j });
     return emptyCells;
 }
 
@@ -42,6 +43,7 @@ PlayField PlayField::operator+(CellPos cell) const {
 }
 
 PlayField::FieldStatus PlayField::checkFieldStatus() const { // doesn't
+
     int Xs = 0, Os = 0;
     for (int i = 0; i < m_size; i++) {
         for (int j = 0; j < m_size; j++) {
@@ -67,6 +69,7 @@ PlayField::FieldStatus PlayField::checkFieldStatus() const { // doesn't
              ((playboard[2][0] == playboard[1][1]) && (playboard[1][1] == playboard[0][2]))))	// case '/'
             return playboard[1][1] == csCross ? fsCrossesWin : fsNoughtsWin;
     }
-    if (PlayField::getEmptyCells().empty()) return fsDraw;
+    if (PlayField::getEmptyCells().empty())
+        return fsDraw;
     return ((Xs - Os == 0) || (Xs - Os == 1)) ? fsNormal : fsInvalid;
 }

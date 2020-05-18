@@ -1,13 +1,18 @@
 #pragma once
 
-#include "vector"
-#include "initializer_list"
+#include <vector>
+#include <initializer_list>
 
 class PlayField {
 public:
     enum CellStatus { csEmpty, csCross, csNought };
-    enum FieldStatus { fsInvalid, fsNormal,
-            fsCrossesWin, fsNoughtsWin, fsDraw };
+    enum FieldStatus {
+        fsInvalid,
+        fsNormal,
+        fsCrossesWin,
+        fsNoughtsWin,
+        fsDraw
+    };
 
     class CellPos {
     public:
@@ -22,8 +27,8 @@ public:
             _x = *cell.begin();
             _y = *(cell.begin() + 1);
         }
-        int getX() { return _x; }
-        int getY() { return _y; }
+        const int getX() { return _x; }
+        const int getY() { return _y; }
     private:
         int _x, _y;
     };

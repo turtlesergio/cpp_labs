@@ -1,5 +1,5 @@
 #include "TreeNode.h"
-#include "cassert"
+#include <cassert>
 
 TreeNode::~TreeNode() {
     for (auto child : children)
@@ -10,8 +10,8 @@ bool TreeNode::isTerminal() const {
     auto fieldStatus = playboard.checkFieldStatus();
     assert(fieldStatus != PlayField::fsInvalid);
     return fieldStatus == PlayField::fsNoughtsWin ||
-    fieldStatus == PlayField::fsCrossesWin ||
-    fieldStatus == PlayField::fsDraw;
+            fieldStatus == PlayField::fsCrossesWin ||
+            fieldStatus == PlayField::fsDraw;
 }
 
 void TreeNode::addChild(TreeNode* child) {

@@ -1,11 +1,11 @@
-#include "vector"
+#include <vector>
 #include "TreeNode.h"
-#include "string"
-#include "iostream"
+#include <string>
+#include <iostream>
 
 using namespace std;
 
-void PrintField(PlayField field) {
+void PrintField(const PlayField &field) {
     for (int i = 0; i < PlayField::m_size; i++) {
         for (int j = 0; j < PlayField::m_size; j++) {
             string output = "| ";
@@ -52,7 +52,7 @@ void CountResults(TreeNode& node, int(&results)[PlayField::m_size]) {
 }
 
 void WalkTree(TreeNode& node, PlayField playfield) {
-    for (int i = 0; i < 3 * PlayField::m_size; i++) {
+    for (int i = 0; i < 3 * playfield.m_size; i++) {
         PrintField(node[i].value());
         int results[PlayField::m_size] = { 0, 0, 0 };
         CountResults(node[i], results);
