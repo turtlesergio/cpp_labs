@@ -57,27 +57,23 @@ int partition(int arr[], int startIdx, int endIdx) {
     return (i + 1);
 }
 
-//быстрая сортировка без рекурсии, используя стеки
+//быстрая сортировка без рекурсии, используя стек
 void QuickSort(int* arr, int startIdx, int endIdx) {
-    stack<int> start, end;
-    start.push(startIdx);
-    end.push(endIdx);
-    int l, r, p;
-    while (!start.empty()) {
-        l = start.top();
-        r = end.top();
-        if (l < r) {
-            p = partition(arr, l, r);
-            start.pop();
-            end.pop();
-            start.push(p+1);
-            end.push(r);
-            start.push(l);
-            end.push(p-1);
+    int stack[endIdx - startIdx + 1];
+    int top = -1;
+    stack[++top] = startIdx;
+    stack[++top] = endIdx;
+    while (top >= 0) {
+        endIdx = stack[top--];
+        startIdx = stack[top--];
+        int p = partition(arr, startIdx, endIdx);
+        if (p - 1 > startIdx) {
+            stack[++top] = startIdx;
+            stack[++top] = p - 1;
         }
-        else {
-            start.pop();
-            end.pop();
+        if (p + 1 < endIdx) {
+            stack[++top] = p + 1;
+            stack[++top] = endIdx;
         }
     }
 }
@@ -168,6 +164,6 @@ int main() {
         cout << "\nThe element has been found, its index is " << idx << ".";
 
     cout << "\nSearch time comparison (linear, binary recursive, binary iterative): "
-		<< time1.count() << ", " << time2.count() << ", " << time3.count() << endl;
+		<< time1.count() << " ms, " << time2.count() << " ms, " << time3.count() << " ms\n";
     return 0;
 }
