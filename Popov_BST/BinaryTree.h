@@ -6,7 +6,7 @@
 class BinaryTree {
 public:
     BinaryTree() = default;
-    explicit BinaryTree(const int iValue) : m_root(new TreeNode(iValue)) {}
+    BinaryTree(const int iValue) : m_root(new TreeNode(iValue)) {}
     ~BinaryTree();
 
     void Insert(const int value);

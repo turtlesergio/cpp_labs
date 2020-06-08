@@ -3,7 +3,7 @@
 
 class TreeNode {
 public:
-    TreeNode() = default;
+    TreeNode() = delete;
     explicit TreeNode(const int iValue) : value(iValue) {}
     ~TreeNode();
 
