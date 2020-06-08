@@ -12,7 +12,7 @@ public:
     TreeNode* Search(const int value) const;
 private:
     TreeNode* m_root = nullptr;
-    static TreeNode* Search(TreeNode* root, int value);
+    static TreeNode* Search(TreeNode* root, const int value);
 
 };
 

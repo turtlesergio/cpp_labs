@@ -8,7 +8,7 @@ TreeNode* BinaryTree::Search(int value) const {
     return Search(m_root, value);
 }
 
-TreeNode* BinaryTree::Search(TreeNode* root, int iValue) {
+TreeNode* BinaryTree::Search(TreeNode* root, const int iValue) {
     if (root == nullptr || root->GetValue() == iValue)
         return root;
     if (root->GetValue() < iValue)
