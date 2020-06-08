@@ -20,8 +20,8 @@ public:
             _x = *cell.begin();
             _y = *(cell.begin() + 1);
         }
-        const int getX() { return _x; }
-        const int getY() { return _y; }
+        const int getX() const { return _x; }
+        const int getY() const { return _y; }
     private:
         int _x, _y;
     };

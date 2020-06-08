@@ -3,6 +3,11 @@
 #include <string>
 #include <iostream>
 
+/* РИ-280017
+ * Попов Сергей Вадимович
+ * github.com/turtlesergio
+ */
+
 using namespace std;
 
 void PrintField(const PlayField &field) {
@@ -25,7 +30,7 @@ void BuildSubTree(TreeNode& node) {
         return;
     const auto emptyCells = node.value().getEmptyCells();
     for (int i = 0; i < emptyCells.size(); i++) {
-        node.addChild(new TreeNode(node.value().makeMove(emptyCells[i])), &node);
+        node.addChild(new TreeNode(node.value().makeMove(emptyCells[i])));
         BuildSubTree(node[i]);
     }
 }

@@ -7,7 +7,7 @@ public:
     : playboard(newBoard) {};
     ~TreeNode();
     bool isTerminal() const;
-    void addChild(TreeNode* child, TreeNode* parent);
+    void addChild(TreeNode* child);
     TreeNode& operator[](int index) const;
     int childCount() const;
     const PlayField& value() const;
