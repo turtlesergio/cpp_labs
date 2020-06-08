@@ -2,8 +2,32 @@
 #include <stack>
 #include <random>
 #include <chrono>
+#include <algorithm>
 
 using namespace std;
+
+//класс стека
+class myStack {
+public:
+    int myStack[100]{}, n = 100, top = -1;
+    void push(int val) {
+        if (top >= n - 1)
+            cout << "\nStack Overflow\n";
+        else {
+            top++;
+            myStack[top] = val;
+        }
+    }
+    void pop() {
+        if (top <= -1)
+            cout << "\nStack Underflow\n";
+        else
+            top--;
+    }
+    bool empty() {
+        return top <= -1;
+    }
+};
 
 //метод вывода массива в консоль
 void Print(int* arr, int N) {
@@ -27,7 +51,7 @@ void FillArray(int* arr, int N, int min, int max) {
 }
 
 //метод обыкновенного поэлементного поиска
-void Search(int* Array, int N, int val) {
+void Search(const int* Array, int N, int val) {
     bool numberIsFound = false;
     int index = -1;
     for (int i = 0; i < N; i++) //поиск числа "42" среди элементов массива
@@ -57,23 +81,27 @@ int partition(int arr[], int startIdx, int endIdx) {
     return (i + 1);
 }
 
-//быстрая сортировка без рекурсии, используя стек
+//быстрая сортировка без рекурсии, используя стеки
 void QuickSort(int* arr, int startIdx, int endIdx) {
-    int stack[endIdx - startIdx + 1];
-    int top = -1;
-    stack[++top] = startIdx;
-    stack[++top] = endIdx;
-    while (top >= 0) {
-        endIdx = stack[top--];
-        startIdx = stack[top--];
-        int p = partition(arr, startIdx, endIdx);
-        if (p - 1 > startIdx) {
-            stack[++top] = startIdx;
-            stack[++top] = p - 1;
+    myStack start, end;
+    start.push(startIdx);
+    end.push(endIdx);
+    int l, h, p;
+    while (!start.empty()) {
+        l = start.myStack[start.top];
+        h = end.myStack[end.top];
+        if (l < h) {
+            p = partition(arr, l, h);
+            start.pop();
+            end.pop();
+            start.push(p + 1);
+            end.push(h);
+            start.push(l);
+            end.push(p - 1);
         }
-        if (p + 1 < endIdx) {
-            stack[++top] = p + 1;
-            stack[++top] = endIdx;
+        else {
+            start.pop();
+            end.pop();
         }
     }
 }
@@ -128,13 +156,13 @@ int BSearch(int* arr, int val, int startIdx, int endIdx) {
 
 int main() {
     int N1 = 10000, N2 = 100;
-	int Array1[N1];
+    int Array1[N1];
     FillArray(Array1, N1, -1000, 1000); //заполнение массива случайными числами
     Search(Array1, N1, 42);
     int Array2[N2];
     FillArray(Array2, N2, -10, 10);
 
-    auto t1start = std::chrono::steady_clock::now(); 		
+    auto t1start = std::chrono::steady_clock::now();
     Search(Array2, N1, 7);
     auto t1end = std::chrono::steady_clock::now();
     auto time1 = std::chrono::duration_cast<std::chrono::milliseconds> (t1end - t1start);
@@ -164,6 +192,6 @@ int main() {
         cout << "\nThe element has been found, its index is " << idx << ".";
 
     cout << "\nSearch time comparison (linear, binary recursive, binary iterative): "
-		<< time1.count() << " ms, " << time2.count() << " ms, " << time3.count() << " ms\n";
+         << time1.count() << ", " << time2.count() << ", " << time3.count() << endl;
     return 0;
 }
