@@ -1,4 +1,5 @@
 #ifndef BST_H
+#define BST_H
 
 #include "TreeNode.h"
 
@@ -12,7 +13,7 @@ public:
     TreeNode* Search(const int value) const;
 private:
     TreeNode* m_root = nullptr;
-    static TreeNode* Search(TreeNode* root, const int value);
+    static TreeNode* Search(TreeNode* const root, const int value);
 
 };
 

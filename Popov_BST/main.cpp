@@ -33,5 +33,6 @@ int main() {
     FindElement(myTree, 0);
     sort(array, array + arrSize);
     auto bstTree = CreateMinimalBST(array, 0, arrSize);
+    delete bstTree;
     return 0;
 }
