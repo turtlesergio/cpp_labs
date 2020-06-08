@@ -9,9 +9,9 @@ void PrintField(const PlayField &field) {
     for (int i = 0; i < PlayField::m_size; i++) {
         for (int j = 0; j < PlayField::m_size; j++) {
             string output = "| ";
-            if (field[PlayField::CellPos({ i, j })] == PlayField::csCross)
+            if (field[{i, j}] == PlayField::csCross)
                 output = "|X";
-            if (field[PlayField::CellPos({ i, j })] == PlayField::csNought)
+            if (field[{i, j}] == PlayField::csNought)
                 output = "|O";
             cout << output;
         }
@@ -25,7 +25,7 @@ void BuildSubTree(TreeNode& node) {
         return;
     const auto emptyCells = node.value().getEmptyCells();
     for (int i = 0; i < emptyCells.size(); i++) {
-        node.addChild(new TreeNode(node.value().makeMove(emptyCells[i]), &node));
+        node.addChild(new TreeNode(node.value().makeMove(emptyCells[i])), &node);
         BuildSubTree(node[i]);
     }
 }
@@ -45,14 +45,13 @@ void CountResults(TreeNode& node, int(&results)[PlayField::m_size]) {
         }
         return;
     }
-    auto emptyCells = node.value().getEmptyCells();
     for (int i = 0; i < node.childCount(); i++) {
         CountResults(node[i], results);
     }
 }
 
-void WalkTree(TreeNode& node, PlayField playfield) {
-    for (int i = 0; i < 3 * playfield.m_size; i++) {
+void WalkTree(TreeNode& node) {
+    for (int i = 0; i < PlayField::m_size * PlayField::m_size; i++) {
         PrintField(node[i].value());
         int results[PlayField::m_size] = { 0, 0, 0 };
         CountResults(node[i], results);
@@ -63,8 +62,8 @@ void WalkTree(TreeNode& node, PlayField playfield) {
 
 int main() {
     PlayField playfield;
-    TreeNode node(playfield, nullptr);
+    TreeNode node(playfield);
     BuildSubTree(node);
-    WalkTree(node, playfield);
+    WalkTree(node);
     return 0;
 }

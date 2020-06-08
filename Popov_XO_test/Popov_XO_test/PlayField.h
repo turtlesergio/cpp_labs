@@ -16,13 +16,6 @@ public:
 
     class CellPos {
     public:
-        CellPos GetCellPos(std::initializer_list<int> cell) {
-            return CellPos(cell);
-        }
-        void SetCellPos(int x, int y) {
-            _x = x;
-            _y = y;
-        }
         CellPos(std::initializer_list<int> cell) {
             _x = *cell.begin();
             _y = *(cell.begin() + 1);

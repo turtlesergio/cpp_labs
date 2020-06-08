@@ -14,9 +14,9 @@ bool TreeNode::isTerminal() const {
             fieldStatus == PlayField::fsDraw;
 }
 
-void TreeNode::addChild(TreeNode* child) {
-    assert(children.size() <= child->childQty());
-    child->parent = this;
+void TreeNode::addChild(TreeNode* child, TreeNode* iParent) {
+    assert(children.size() < child->childQty());
+    child->parent = iParent;
     children.push_back(child);
 }
 
@@ -33,5 +33,5 @@ int TreeNode::childCount() const {
 }
 
 int TreeNode::childQty() const {
-    return (parent ? parent->childQty() - 1 : 9);
+    return (parent ? parent->childQty() - 1 : PlayField::m_size * PlayField::m_size);
 }

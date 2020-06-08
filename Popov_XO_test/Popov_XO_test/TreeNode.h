@@ -3,11 +3,11 @@
 
 class TreeNode {
 public:
-    TreeNode(PlayField newBoard, TreeNode* parent)
-    : playboard(newBoard), parent(parent) {};
+    TreeNode(PlayField newBoard)
+    : playboard(newBoard) {};
     ~TreeNode();
     bool isTerminal() const;
-    void addChild(TreeNode* child);
+    void addChild(TreeNode* child, TreeNode* parent);
     TreeNode& operator[](int index) const;
     int childCount() const;
     const PlayField& value() const;
